@@ -1,0 +1,9 @@
+TODO:
+	- fall off wall when hanging for too long [Done]
+	- what when happen when you reach end of level, should fall
+
+Extras:
+	- add indicator for player wall stick timer
+
+Quick fixes:
+	- player flipping logic when hitting walls, IDK, needs more testing

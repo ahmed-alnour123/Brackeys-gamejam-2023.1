@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cx3rsbg6m38l3"]
+
+[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/square.png" id="1_a02i3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
+
+[node name="Platform" type="StaticBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_dfq0m")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+scale = Vector2(20, 20)
+texture = ExtResource("1_a02i3")

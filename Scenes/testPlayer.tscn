@@ -1,0 +1,81 @@
+[gd_scene load_steps=3 format=3 uid="uid://bprljf5voafxj"]
+
+[ext_resource type="PackedScene" uid="uid://yij1umkn5tbg" path="res://Scenes/player.tscn" id="1_08fjw"]
+[ext_resource type="PackedScene" uid="uid://cx3rsbg6m38l3" path="res://Scenes/platform.tscn" id="2_ppvrs"]
+
+[node name="TestPlayer" type="Node2D"]
+metadata/_edit_vertical_guides_ = [540.0]
+metadata/_edit_horizontal_guides_ = [960.0]
+
+[node name="Player" parent="." instance=ExtResource("1_08fjw")]
+position = Vector2(998, 522)
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Ground" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(540, 1887)
+scale = Vector2(100, 1)
+
+[node name="RightWall" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(1064, 1394)
+rotation = 1.57079
+scale = Vector2(50.7643, 1.09913)
+
+[node name="CollisionShape2D" parent="Platforms/RightWall" index="0"]
+one_way_collision = false
+
+[node name="LeftWall" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(20, 1401)
+rotation = 1.57079
+scale = Vector2(50.7643, 1.09913)
+
+[node name="CollisionShape2D" parent="Platforms/LeftWall" index="0"]
+one_way_collision = false
+
+[node name="Platform1" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(924, 1689)
+scale = Vector2(10, 1)
+
+[node name="Platform2" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(551, 1630)
+scale = Vector2(10, 1)
+
+[node name="Platform3" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(161, 1521)
+scale = Vector2(10, 1)
+
+[node name="Platform4" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(551, 1768)
+scale = Vector2(10, 1)
+
+[node name="Platform5" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(749, 1339)
+scale = Vector2(10, 1)
+
+[node name="Platform6" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(551, 1280)
+scale = Vector2(10, 1)
+
+[node name="Platform7" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(161, 1171)
+scale = Vector2(10, 1)
+
+[node name="Platform8" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(551, 1475)
+scale = Vector2(10, 1)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 749.0
+offset_bottom = 299.0
+theme_override_font_sizes/font_size = 52
+text = "DEBUG"
+autowrap_mode = 2
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[editable path="Platforms/RightWall"]
+[editable path="Platforms/LeftWall"]

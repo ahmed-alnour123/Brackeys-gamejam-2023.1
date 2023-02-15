@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://yij1umkn5tbg"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_0kr1h"]
+[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/square.png" id="1_0o4bv"]
+[ext_resource type="AudioStream" uid="uid://88cupaf20ee0" path="res://Art/Sounds/button-click.wav" id="3_cxpu6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8dwyn"]
+size = Vector2(100, 100)
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 1
+script = ExtResource("1_0kr1h")
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8dwyn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(100, 100)
+texture = ExtResource("1_0o4bv")
+
+[node name="WallStickTimer" type="Timer" parent="."]
+process_callback = 0
+one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_cxpu6")
