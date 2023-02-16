@@ -1,16 +1,97 @@
-[gd_scene load_steps=3 format=3 uid="uid://cx3rsbg6m38l3"]
+[gd_scene load_steps=8 format=3 uid="uid://cj3v51o8ybu88"]
 
-[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/square.png" id="1_a02i3"]
+[ext_resource type="Script" path="res://Scripts/Platform.gd" id="1_k5eh4"]
+[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/Sprites/square.png" id="1_naqtv"]
+[ext_resource type="PackedScene" uid="uid://de3lrpc4ef3sn" path="res://Scenes/Spike.tscn" id="3_ifhwu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
 
-[node name="Platform" type="StaticBody2D"]
+[sub_resource type="Animation" id="Animation_mrifm"]
+resource_name = "move_horizontally"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-200, 0), Vector2(0, 0), Vector2(200, 0), Vector2(0, 0)]
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[sub_resource type="Animation" id="Animation_vbu2s"]
+resource_name = "move_vertically"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Platform:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2.5, 4, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200), Vector2(0, 0), Vector2(0, 200), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i4qt6"]
+_data = {
+"move_horizontally": SubResource("Animation_mrifm"),
+"move_vertically": SubResource("Animation_vbu2s")
+}
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_k5eh4")
+
+[node name="Platform" type="AnimatableBody2D" parent="."]
+
+[node name="Center" type="CollisionShape2D" parent="Platform"]
+scale = Vector2(10, 1)
 shape = SubResource("RectangleShape2D_dfq0m")
 one_way_collision = true
 
-[node name="Sprite2D" type="Sprite2D" parent="CollisionShape2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Platform/Center"]
 self_modulate = Color(0.333333, 0.607843, 1, 1)
 scale = Vector2(20, 20)
-texture = ExtResource("1_a02i3")
+texture = ExtResource("1_naqtv")
+
+[node name="Left" type="CollisionShape2D" parent="Platform"]
+visible = false
+position = Vector2(-500, 0)
+scale = Vector2(40, 1)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform/Left"]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(20, 20)
+texture = ExtResource("1_naqtv")
+
+[node name="Right" type="CollisionShape2D" parent="Platform"]
+visible = false
+position = Vector2(500, 0)
+scale = Vector2(40, 1)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform/Right"]
+self_modulate = Color(1, 0, 0, 1)
+scale = Vector2(20, 20)
+texture = ExtResource("1_naqtv")
+
+[node name="Spike" parent="Platform" instance=ExtResource("3_ifhwu")]
+visible = false
+position = Vector2(-136, -10)
+
+[node name="Spike2" parent="Platform" instance=ExtResource("3_ifhwu")]
+visible = false
+position = Vector2(136, -10)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_i4qt6")
+}

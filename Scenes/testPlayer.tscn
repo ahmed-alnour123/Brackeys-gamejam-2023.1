@@ -1,72 +1,161 @@
-[gd_scene load_steps=3 format=3 uid="uid://bprljf5voafxj"]
+[gd_scene load_steps=9 format=3 uid="uid://bprljf5voafxj"]
 
-[ext_resource type="PackedScene" uid="uid://yij1umkn5tbg" path="res://Scenes/player.tscn" id="1_08fjw"]
-[ext_resource type="PackedScene" uid="uid://cx3rsbg6m38l3" path="res://Scenes/platform.tscn" id="2_ppvrs"]
+[ext_resource type="PackedScene" uid="uid://1qvgecsokhoh" path="res://Scenes/player.tscn" id="1_08fjw"]
+[ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_ujyo7"]
+[ext_resource type="PackedScene" uid="uid://cj3v51o8ybu88" path="res://Scenes/platform.tscn" id="2_ppvrs"]
+[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/Sprites/square.png" id="4_t7p5o"]
+[ext_resource type="PackedScene" uid="uid://de3lrpc4ef3sn" path="res://Scenes/Spike.tscn" id="5_sgyyr"]
+[ext_resource type="PackedScene" uid="uid://bxfqbfg0v2tl" path="res://Scenes/HUD.tscn" id="6_h740e"]
 
-[node name="TestPlayer" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hyke"]
+size = Vector2(1500, 100)
+
+[node name="TestLevel" type="Node2D"]
+script = ExtResource("1_ujyo7")
+platform = ExtResource("2_ppvrs")
 metadata/_edit_vertical_guides_ = [540.0]
 metadata/_edit_horizontal_guides_ = [960.0]
 
 [node name="Player" parent="." instance=ExtResource("1_08fjw")]
-position = Vector2(998, 522)
+position = Vector2(150, 1700)
+jump_power = 600.0
 
 [node name="Platforms" type="Node2D" parent="."]
 
-[node name="Ground" parent="Platforms" instance=ExtResource("2_ppvrs")]
+[node name="Walls" type="Node2D" parent="Platforms"]
+
+[node name="Ground" type="StaticBody2D" parent="Platforms/Walls"]
 position = Vector2(540, 1887)
-scale = Vector2(100, 1)
+scale = Vector2(10, 1)
 
-[node name="RightWall" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(1064, 1394)
-rotation = 1.57079
-scale = Vector2(50.7643, 1.09913)
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/Ground"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+one_way_collision = true
 
-[node name="CollisionShape2D" parent="Platforms/RightWall" index="0"]
-one_way_collision = false
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/Ground/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_t7p5o")
 
-[node name="LeftWall" parent="Platforms" instance=ExtResource("2_ppvrs")]
+[node name="Ground2" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(691, 510)
+scale = Vector2(3.84, 1)
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/Ground2"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+one_way_collision = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/Ground2/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_t7p5o")
+
+[node name="RightWall" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(1080, 1350)
+rotation = -1.5708
+scale = Vector2(10, 1)
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/RightWall"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/RightWall/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_t7p5o")
+
+[node name="LeftWall" type="StaticBody2D" parent="Platforms/Walls"]
 position = Vector2(20, 1401)
 rotation = 1.57079
-scale = Vector2(50.7643, 1.09913)
+scale = Vector2(10, 1.09913)
 
-[node name="CollisionShape2D" parent="Platforms/LeftWall" index="0"]
-one_way_collision = false
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/LeftWall"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+one_way_collision = true
 
-[node name="Platform1" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(924, 1689)
-scale = Vector2(10, 1)
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/LeftWall/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_t7p5o")
 
 [node name="Platform2" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(551, 1630)
-scale = Vector2(10, 1)
+position = Vector2(900, 1700)
 
 [node name="Platform3" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(161, 1521)
-scale = Vector2(10, 1)
+position = Vector2(600, 1550)
+destroy_when_flip = true
 
 [node name="Platform4" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(551, 1768)
-scale = Vector2(10, 1)
+position = Vector2(300, 1400)
+is_animated = true
 
 [node name="Platform5" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(749, 1339)
-scale = Vector2(10, 1)
+position = Vector2(900, 1400)
+destroy_when_flip = true
 
 [node name="Platform6" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(551, 1280)
-scale = Vector2(10, 1)
+position = Vector2(600, 1250)
+destroy_when_flip = true
+
+[node name="Platform11" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(900, 1100)
+rotation = -1.57079
+destroy_when_flip = true
+is_animated = true
 
 [node name="Platform7" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(161, 1171)
-scale = Vector2(10, 1)
+position = Vector2(150, 1100)
 
 [node name="Platform8" parent="Platforms" instance=ExtResource("2_ppvrs")]
-position = Vector2(551, 1475)
-scale = Vector2(10, 1)
+position = Vector2(600, 950)
+destroy_when_flip = true
+move_direction = 1
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Platform12" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(300, 800)
+destroy_when_flip = true
+is_animated = true
 
-[node name="DebugLabel" type="Label" parent="CanvasLayer"]
+[node name="Platform9" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(900, 800)
+
+[node name="Platform10" parent="Platforms" instance=ExtResource("2_ppvrs")]
+position = Vector2(450, 650)
+destroy_when_flip = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="LevelEndTriggers" type="Node2D" parent="."]
+
+[node name="LevelTop" type="Area2D" parent="LevelEndTriggers"]
+position = Vector2(0, -460)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEndTriggers/LevelTop"]
+position = Vector2(450, 759)
+shape = SubResource("RectangleShape2D_7hyke")
+
+[node name="LevelBottom" type="Area2D" parent="LevelEndTriggers"]
+position = Vector2(98, 1048)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEndTriggers/LevelBottom"]
+position = Vector2(450, 759)
+shape = SubResource("RectangleShape2D_7hyke")
+
+[node name="Spike" parent="." instance=ExtResource("5_sgyyr")]
+position = Vector2(450, 1850)
+
+[node name="HUD" parent="." instance=ExtResource("6_h740e")]
+
+[node name="DebugLabel" type="Label" parent="HUD"]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 749.0
@@ -75,7 +164,6 @@ theme_override_font_sizes/font_size = 52
 text = "DEBUG"
 autowrap_mode = 2
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-
-[editable path="Platforms/RightWall"]
-[editable path="Platforms/LeftWall"]
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
+[connection signal="body_entered" from="LevelEndTriggers/LevelTop" to="." method="_on_level_top_body_entered"]
+[connection signal="body_entered" from="LevelEndTriggers/LevelBottom" to="." method="_on_level_bottom_body_entered"]

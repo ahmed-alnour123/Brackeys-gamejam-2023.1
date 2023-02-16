@@ -1,9 +1,22 @@
 TODO:
 	- fall off wall when hanging for too long [Done]
-	- what when happen when you reach end of level, should fall
+	- implement end of level or player death
+	- add when condition, when touching the bottom win collider
+
+Idea:
+	- add level timer for speedrun
 
 Extras:
-	- add indicator for player wall stick timer
+	pass
+
+Fixme:
+	- player jump speed differ on platforms
 
 Quick fixes:
 	- player flipping logic when hitting walls, IDK, needs more testing
+
+
+Canceled ideas:
+	- when player climb to the top, an instances of him get left behind
+		you need to collect them all again when going dawnward
+	- add indicator for player wall stick timer [it's not working sometimes]
