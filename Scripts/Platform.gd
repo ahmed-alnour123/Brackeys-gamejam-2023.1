@@ -3,6 +3,7 @@ extends Node2D
 @export var destroy_when_flip := false
 @export var is_animated := false
 @export var move_direction := MoveDirection.Horizontally
+@export var two_way_collision := false
 
 enum MoveDirection {
 	Horizontally,
@@ -16,6 +17,7 @@ var spike2
 
 func _ready() -> void:
 	get_parent().get_parent().flip_level.connect(switch_platforms)
+	$Platform/Center.one_way_collision = not two_way_collision
 	leftCollider = $Platform/Left
 	rightCollider = $Platform/Right
 	spike1 = $Platform/Spike

@@ -1,38 +1,80 @@
-[gd_scene load_steps=4 format=3 uid="uid://bxfqbfg0v2tl"]
+[gd_scene load_steps=8 format=3 uid="uid://bxfqbfg0v2tl"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wr8qb"]
+[ext_resource type="FontFile" uid="uid://dqllwtajew8cd" path="res://Art/UI/Kenny/Font/kenvector_future_thin.ttf" id="2_u5rwb"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_hlouo"]
+color = Color(0.152941, 0.152941, 0.152941, 1)
+thickness = 20
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_ylkj6"]
+color = Color(0, 0.917647, 0, 1)
+thickness = 20
 
 [sub_resource type="LabelSettings" id="LabelSettings_lyw8r"]
+font = ExtResource("2_u5rwb")
 font_size = 138
 
 [sub_resource type="LabelSettings" id="LabelSettings_u7vv3"]
+font = ExtResource("2_u5rwb")
 font_size = 97
+
+[sub_resource type="LabelSettings" id="LabelSettings_x73ub"]
+font = ExtResource("2_u5rwb")
+font_size = 82
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_wr8qb")
 
+[node name="PlayerHealth" type="HSlider" parent="."]
+offset_left = 106.0
+offset_right = 532.0
+offset_bottom = 150.0
+theme_override_styles/slider = SubResource("StyleBoxLine_hlouo")
+theme_override_styles/grabber_area = SubResource("StyleBoxLine_ylkj6")
+value = 50.0
+
 [node name="GameoverMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="GameoverLabel" type="Label" parent="GameoverMenu"]
-offset_left = 142.0
-offset_top = 408.0
-offset_right = 938.0
-offset_bottom = 600.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -418.0
+offset_top = -321.0
+offset_right = 418.0
+offset_bottom = -129.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Game Over"
 label_settings = SubResource("LabelSettings_lyw8r")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="RestartButton" type="Button" parent="GameoverMenu"]
-offset_left = 358.0
-offset_top = 1240.0
-offset_right = 722.0
-offset_bottom = 1355.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = 195.0
+offset_right = 208.0
+offset_bottom = 322.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_u5rwb")
 theme_override_font_sizes/font_size = 75
 text = "Restart"
 
@@ -45,7 +87,15 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="NextLevelLabel" type="Label" parent="LevelClearedMenu"]
+[node name="Panel" type="Panel" parent="LevelClearedMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelClearedLabel" type="Label" parent="LevelClearedMenu"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -53,12 +103,12 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -486.0
-offset_top = -504.0
+offset_top = -263.0
 offset_right = 486.0
-offset_bottom = -368.0
+offset_bottom = -127.0
 grow_horizontal = 2
 grow_vertical = 2
-text = "Level Cleared!!"
+text = "Level Cleared"
 label_settings = SubResource("LabelSettings_u7vv3")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -70,14 +120,27 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -114.0
-offset_top = 191.0
-offset_right = 114.0
-offset_bottom = 308.0
+offset_left = -132.0
+offset_top = 201.0
+offset_right = 132.0
+offset_bottom = 299.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_u5rwb")
 theme_override_font_sizes/font_size = 79
 text = "Next"
+
+[node name="GameTimer" type="Label" parent="."]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -443.0
+offset_bottom = 150.0
+grow_horizontal = 0
+text = "00:00.00"
+label_settings = SubResource("LabelSettings_x73ub")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_down" from="GameoverMenu/RestartButton" to="." method="_on_restart_button_button_down"]
 [connection signal="button_down" from="LevelClearedMenu/NextLevelButton" to="." method="_on_next_level_button_button_down"]

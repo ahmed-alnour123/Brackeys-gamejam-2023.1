@@ -1,0 +1,123 @@
+[gd_scene load_steps=8 format=3 uid="uid://ccartsomw5506"]
+
+[ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_kfxwl"]
+[ext_resource type="PackedScene" uid="uid://cj3v51o8ybu88" path="res://Scenes/platform.tscn" id="2_p6e41"]
+[ext_resource type="PackedScene" uid="uid://1qvgecsokhoh" path="res://Scenes/player.tscn" id="3_co7x5"]
+[ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/Sprites/square.png" id="4_ugxei"]
+[ext_resource type="PackedScene" uid="uid://bxfqbfg0v2tl" path="res://Scenes/HUD.tscn" id="6_chl0j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7hyke"]
+size = Vector2(1248, 100)
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_kfxwl")
+platform = ExtResource("2_p6e41")
+metadata/_edit_vertical_guides_ = [540.0]
+metadata/_edit_horizontal_guides_ = [960.0]
+
+[node name="Player" parent="." instance=ExtResource("3_co7x5")]
+position = Vector2(150, 1700)
+jump_power = 1200.0
+gravity = 4000
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Walls" type="Node2D" parent="Platforms"]
+
+[node name="Ceiling" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(540, 0)
+scale = Vector2(10, 1)
+metadata/_edit_group_ = true
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/Ceiling"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/Ceiling/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_ugxei")
+
+[node name="Ground" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(540, 1887)
+scale = Vector2(10, 1)
+metadata/_edit_group_ = true
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/Ground"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/Ground/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_ugxei")
+
+[node name="RightWall" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(1080, 1000)
+rotation = -1.5708
+scale = Vector2(10, 1)
+metadata/_edit_group_ = true
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/RightWall"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/RightWall/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_ugxei")
+
+[node name="LeftWall" type="StaticBody2D" parent="Platforms/Walls"]
+position = Vector2(20, 1000)
+rotation = 1.57079
+scale = Vector2(10, 1)
+metadata/_edit_group_ = true
+
+[node name="Center" type="CollisionShape2D" parent="Platforms/Walls/LeftWall"]
+scale = Vector2(10, 3)
+shape = SubResource("RectangleShape2D_dfq0m")
+
+[node name="Sprite2D" type="Sprite2D" parent="Platforms/Walls/LeftWall/Center"]
+self_modulate = Color(0.333333, 0.607843, 1, 1)
+z_index = 1
+scale = Vector2(20, 20)
+texture = ExtResource("4_ugxei")
+
+[node name="Platform1" parent="Platforms" instance=ExtResource("2_p6e41")]
+position = Vector2(600, 1720)
+
+[node name="LevelEndTriggers" type="Node2D" parent="."]
+
+[node name="LevelTop" type="Area2D" parent="LevelEndTriggers"]
+position = Vector2(565, 1400)
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEndTriggers/LevelTop"]
+shape = SubResource("RectangleShape2D_7hyke")
+
+[node name="Sprite2D" type="Sprite2D" parent="LevelEndTriggers/LevelTop"]
+self_modulate = Color(0.0705882, 1, 0, 1)
+scale = Vector2(1100, 100)
+texture = ExtResource("4_ugxei")
+
+[node name="LevelBottom" type="Area2D" parent="LevelEndTriggers"]
+visible = false
+position = Vector2(565, 1806)
+monitoring = false
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelEndTriggers/LevelBottom"]
+shape = SubResource("RectangleShape2D_7hyke")
+
+[node name="HUD" parent="." instance=ExtResource("6_chl0j")]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
+[connection signal="body_entered" from="LevelEndTriggers/LevelTop" to="." method="_on_level_top_body_entered"]
+[connection signal="body_entered" from="LevelEndTriggers/LevelBottom" to="." method="_on_level_bottom_body_entered"]

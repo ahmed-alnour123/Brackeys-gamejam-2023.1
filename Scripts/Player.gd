@@ -3,7 +3,8 @@ extends CharacterBody2D
 signal player_dead
 
 @export var speed := 600.0
-@export var jump_power := 550.0
+@export var jump_power := 600.0
+@export_range(1000.0, 10000) var gravity := 980
 @export_range(0, 1) var wall_slide_factor := 0.5
 @export_range(0.1, 3) var wall_stick_time := 1.0
 
@@ -19,10 +20,9 @@ var counter = 0
 ## end debug
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
+#var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
-	debugLabel = get_parent().get_node("HUD/DebugLabel")
 	get_parent().flip_level.connect(func(): is_level_flipped = true)
 	
 	$WallStickTimer.timeout.connect(func():
@@ -33,6 +33,7 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	modulate = Color.WHITE.lerp(Color.RED, 1- float(health) / MAX_HEALTH)
+	get_parent().get_node("HUD/PlayerHealth").value = int(health/MAX_HEALTH * 100)
 	if(health <= 0):
 		emit_signal("player_dead")
 	
@@ -51,7 +52,6 @@ func _physics_process(delta: float) -> void:
 	else:
 		if is_level_flipped:
 			health -= delta
-			set_debug(health)
 		
 		# change moving direction
 		var x = speed if (velocity.x > 0) else -speed
@@ -65,7 +65,7 @@ func _physics_process(delta: float) -> void:
 		if is_on_floor():
 			velocity.y = -jump_power
 			# change x speed when jumping, it depends on jump power
-			velocity.x = sign(velocity.x) * cos(deg_to_rad(60)) * jump_power
+#			velocity.x = sign(velocity.x) * cos(deg_to_rad(60)) * jump_power
 			# $AudioStreamPlayer.play()
 		elif is_on_wall():
 			var jump_angle := 60 if (get_wall_normal() == Vector2.LEFT) else 120
@@ -76,6 +76,3 @@ func _physics_process(delta: float) -> void:
 
 func get_hit():
 	health -= 1
-	
-func set_debug(s):
-		debugLabel.text = str(s)

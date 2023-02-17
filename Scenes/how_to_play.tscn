@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://ulgr0l3k2dl7"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_xm1t6"]
+[ext_resource type="FontFile" uid="uid://dqllwtajew8cd" path="res://Art/UI/Kenny/Font/kenvector_future_thin.ttf" id="2_tou0a"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_wcfs0"]
+font = ExtResource("2_tou0a")
+font_size = 149
+
+[sub_resource type="LabelSettings" id="LabelSettings_xo34k"]
+font = ExtResource("2_tou0a")
+font_size = 60
+
+[node name="HowToPlay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xm1t6")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.223529, 0.215686, 0.560784, 1)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -449.5
+offset_top = 192.0
+offset_right = 449.5
+offset_bottom = 409.0
+grow_horizontal = 2
+text = "How to play"
+label_settings = SubResource("LabelSettings_wcfs0")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Intructions" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 32.0
+offset_top = -215.0
+offset_right = -32.0
+offset_bottom = 215.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "- Press mouse button
+   to jump
+
+- you can hold it for
+   auto jumping
+
+- reach the top then
+   go down without burning"
+label_settings = SubResource("LabelSettings_xo34k")
+vertical_alignment = 1
+
+[node name="PlayButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -485.0
+offset_top = -207.0
+offset_right = -20.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_tou0a")
+theme_override_font_sizes/font_size = 115
+text = "Play"
+
+[connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]

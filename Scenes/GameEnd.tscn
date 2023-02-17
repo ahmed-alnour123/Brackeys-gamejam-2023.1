@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://dryljirr6ukw4"]
+
+[ext_resource type="FontFile" uid="uid://dqllwtajew8cd" path="res://Art/UI/Kenny/Font/kenvector_future_thin.ttf" id="1_llhyd"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ra5b5"]
+font = ExtResource("1_llhyd")
+font_size = 92
+
+[node name="GameEnd" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "congratulations
+You Finished
+the game
+
+
+Well Done"
+label_settings = SubResource("LabelSettings_ra5b5")
+horizontal_alignment = 1
+vertical_alignment = 1
