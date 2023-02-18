@@ -17,6 +17,7 @@ func _input(event: InputEvent) -> void:
 
 func _ready() -> void:
 	start_time = Time.get_ticks_msec()
+	MusicPlayer.play()
 
 func _process(delta: float) -> void:
 	update_timer(delta)

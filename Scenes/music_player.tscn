@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://84sn2s0w7ugd"]
+
+[ext_resource type="AudioStream" uid="uid://bxxsggt0ap76" path="res://Art/Sounds/Music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="1_kgjm4"]
+
+[node name="MusicPlayer" type="AudioStreamPlayer"]
+stream = ExtResource("1_kgjm4")

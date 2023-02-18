@@ -18,7 +18,8 @@ func _on_restart_button_button_down() -> void:
 
 
 func _on_next_level_button_button_down() -> void:
-	var scene_name = "res://Scenes/Levels/" + get_tree().root.get_child(0).name + ".tscn"
+	var scene_name = "res://Scenes/Levels/" + get_tree().root.get_child(1).name + ".tscn"
 	var index = levels.find(scene_name)
 	var next_scene = levels[index + 1] if (index < levels.size() - 1 and index != -1) else "res://Scenes/GameEnd.tscn"
+	printt(scene_name, index, next_scene, levels)
 	get_tree().change_scene_to_file(next_scene)

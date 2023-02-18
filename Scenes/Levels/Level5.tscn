@@ -1,11 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://xp8lskr0ttxf"]
+[gd_scene load_steps=13 format=3 uid="uid://xp8lskr0ttxf"]
 
 [ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_qsq02"]
 [ext_resource type="PackedScene" uid="uid://cj3v51o8ybu88" path="res://Scenes/platform.tscn" id="2_xviif"]
 [ext_resource type="PackedScene" uid="uid://1qvgecsokhoh" path="res://Scenes/player.tscn" id="3_jcpkh"]
 [ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/Sprites/square.png" id="4_ugl3r"]
 [ext_resource type="PackedScene" uid="uid://bxfqbfg0v2tl" path="res://Scenes/HUD.tscn" id="5_dufeo"]
-[ext_resource type="AudioStream" uid="uid://bxxsggt0ap76" path="res://Art/Sounds/Music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="6_sllfv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
 
@@ -188,10 +187,6 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_7hyke")
 
 [node name="HUD" parent="." instance=ExtResource("5_dufeo")]
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_sllfv")
-autoplay = true
 
 [node name="DustParticles" type="GPUParticles2D" parent="."]
 position = Vector2(0, 950)
