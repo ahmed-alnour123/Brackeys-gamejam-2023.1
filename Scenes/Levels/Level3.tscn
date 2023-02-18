@@ -1,15 +1,48 @@
-[gd_scene load_steps=8 format=3 uid="uid://dun4p4182xbtj"]
+[gd_scene load_steps=14 format=3 uid="uid://dun4p4182xbtj"]
 
 [ext_resource type="Script" path="res://Scripts/LevelManager.gd" id="1_4bjqr"]
 [ext_resource type="PackedScene" uid="uid://cj3v51o8ybu88" path="res://Scenes/platform.tscn" id="2_mxh5d"]
 [ext_resource type="PackedScene" uid="uid://1qvgecsokhoh" path="res://Scenes/player.tscn" id="3_24dyf"]
 [ext_resource type="Texture2D" uid="uid://k4q3s3t8616t" path="res://Art/Sprites/square.png" id="4_vpcca"]
 [ext_resource type="PackedScene" uid="uid://bxfqbfg0v2tl" path="res://Scenes/HUD.tscn" id="5_3tbx3"]
+[ext_resource type="AudioStream" uid="uid://bxxsggt0ap76" path="res://Art/Sounds/Music/Juhani Junkala [Retro Game Music Pack] Level 1.wav" id="6_nx1kx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dfq0m"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7hyke"]
 size = Vector2(1248, 100)
+
+[sub_resource type="Gradient" id="Gradient_qkh6v"]
+colors = PackedColorArray(0.262932, 0.262932, 0.262932, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_shh7q"]
+gradient = SubResource("Gradient_qkh6v")
+
+[sub_resource type="Gradient" id="Gradient_312yi"]
+offsets = PackedFloat32Array(0.0153257, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_r17wo"]
+gradient = SubResource("Gradient_312yi")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ehl8r"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 1000, 1)
+particle_flag_disable_z = true
+spread = 42.15
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 25.0
+initial_velocity_max = 225.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 5.0
+scale_max = 5.0
+color_ramp = SubResource("GradientTexture1D_r17wo")
+color_initial_ramp = SubResource("GradientTexture1D_shh7q")
+turbulence_enabled = true
+turbulence_noise_strength = 20.0
+turbulence_noise_scale = 10.0
+turbulence_noise_speed = Vector3(1000, 1000, 0.5)
 
 [node name="Level3" type="Node2D"]
 script = ExtResource("1_4bjqr")
@@ -119,7 +152,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_7hyke")
 
 [node name="Sprite2D" type="Sprite2D" parent="LevelEndTriggers/LevelTop"]
-self_modulate = Color(0.0705882, 1, 0, 1)
+self_modulate = Color(0.909804, 0.909804, 0.909804, 1)
 scale = Vector2(1100, 100)
 texture = ExtResource("4_vpcca")
 
@@ -135,6 +168,15 @@ shape = SubResource("RectangleShape2D_7hyke")
 [node name="HUD" parent="." instance=ExtResource("5_3tbx3")]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_nx1kx")
+autoplay = true
+
+[node name="DustParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 950)
+amount = 300
+process_material = SubResource("ParticleProcessMaterial_ehl8r")
+lifetime = 20.0
+preprocess = 30.0
 
 [connection signal="player_dead" from="Player" to="." method="_on_player_player_dead"]
 [connection signal="body_entered" from="LevelEndTriggers/LevelTop" to="." method="_on_level_top_body_entered"]

@@ -10,10 +10,10 @@ config_version=5
 
 [application]
 
-config/name="Brackeys game jam 2023.1"
+config/name="Down Upwards"
 run/main_scene="res://Scenes/main_menu.tscn"
 config/features=PackedStringArray("4.0", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://down_upwards_main_menu_icon.png"
 
 [display]
 

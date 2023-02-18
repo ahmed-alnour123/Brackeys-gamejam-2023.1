@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bxfqbfg0v2tl"]
+[gd_scene load_steps=9 format=3 uid="uid://bxfqbfg0v2tl"]
 
 [ext_resource type="Script" path="res://Scripts/HUD.gd" id="1_wr8qb"]
 [ext_resource type="FontFile" uid="uid://dqllwtajew8cd" path="res://Art/UI/Kenny/Font/kenvector_future_thin.ttf" id="2_u5rwb"]
@@ -10,6 +10,9 @@ thickness = 20
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_ylkj6"]
 color = Color(0, 0.917647, 0, 1)
 thickness = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3m4s4"]
+bg_color = Color(0.254902, 0.25098, 0.45098, 0.498039)
 
 [sub_resource type="LabelSettings" id="LabelSettings_lyw8r"]
 font = ExtResource("2_u5rwb")
@@ -25,6 +28,7 @@ font_size = 82
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_wr8qb")
+metadata/_edit_vertical_guides_ = []
 
 [node name="PlayerHealth" type="HSlider" parent="."]
 offset_left = 106.0
@@ -42,6 +46,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="GameoverMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3m4s4")
 
 [node name="GameoverLabel" type="Label" parent="GameoverMenu"]
 layout_mode = 1
@@ -94,6 +107,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_3m4s4")
 
 [node name="LevelClearedLabel" type="Label" parent="LevelClearedMenu"]
 layout_mode = 1

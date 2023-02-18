@@ -1,8 +1,5 @@
 TODO:
-	- add particle and shader effects
-	- make better UI (use packages)
-	- use color pallate
-	- make better HowToPlay
+	- design a hard level
 
 	D fall off wall when hanging for too long [Done]
 	D implement end of level or player death [Done]
@@ -12,6 +9,16 @@ TODO:
 	D add speedrun time in win menu [Timer is already visible]
 	D design some levels
 	D delete debugLabel
+	D use color pallate [Used a simple one]
+	D make better HowToPlay
+	D design main menu
+	D add particle and shader effects
+		D player death explosion
+		D player move
+		C player glow [due to performance reasons]
+	D add sounds
+		D buttons sounds
+	D design an icon
 
 when adding level:
 	duplicate any level scene
@@ -19,7 +26,7 @@ when adding level:
 	add scene to HUD.gd array
 
 Idea:
-	- add level timer for speedrun
+	D add level timer for speedrun
 
 Extras:
 	pass
@@ -31,8 +38,9 @@ Quick fixes:
 	- player flipping logic when hitting walls, IDK, needs more testing
 
 
-Canceled ideas:
+Cancelled ideas:
 	- when player climb to the top, an instances of him get left behind
 		you need to collect them all again when going dawnward
 	- add indicator for player wall stick timer [it's not working sometimes]
 	- adjust health according to levels
+	- make better UI (use packages) [Cancelled]

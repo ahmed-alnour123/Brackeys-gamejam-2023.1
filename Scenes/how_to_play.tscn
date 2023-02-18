@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://ulgr0l3k2dl7"]
+[gd_scene load_steps=6 format=3 uid="uid://ulgr0l3k2dl7"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_xm1t6"]
 [ext_resource type="FontFile" uid="uid://dqllwtajew8cd" path="res://Art/UI/Kenny/Font/kenvector_future_thin.ttf" id="2_tou0a"]
+[ext_resource type="AudioStream" uid="uid://okbn41xt4h6o" path="res://Art/bfxr_sounds/Blip_Select.wav" id="3_7v368"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_wcfs0"]
 font = ExtResource("2_tou0a")
@@ -27,7 +28,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.223529, 0.215686, 0.560784, 1)
+color = Color(0.254902, 0.25098, 0.45098, 1)
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 1
@@ -83,5 +84,8 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("2_tou0a")
 theme_override_font_sizes/font_size = 115
 text = "Play"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_7v368")
 
 [connection signal="button_down" from="PlayButton" to="." method="_on_play_button_button_down"]

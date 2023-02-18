@@ -12,7 +12,8 @@ var count_time = true
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
 		if event.keycode == KEY_P:
-			_on_level_top_body_entered($Player)
+#			_on_level_top_body_entered($Player)
+			pass
 
 func _ready() -> void:
 	start_time = Time.get_ticks_msec()
@@ -35,7 +36,7 @@ func _on_level_bottom_body_entered(body: Node2D) -> void:
 
 
 func _on_player_player_dead() -> void:
-	$Player.queue_free()
+#	$Player.queue_free()
 	emit_signal("player_lose")
 	count_time = false
 
@@ -43,6 +44,7 @@ func win_level():
 	# show some animation
 	emit_signal("player_won")
 	$Player.set_physics_process(false)
+	$Player.play_win_sound()
 	count_time = false
 	# go to next level
 	# it will happen from HUD

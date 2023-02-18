@@ -11,7 +11,6 @@ signal player_dead
 const MAX_HEALTH = 10.0
 var health: float = MAX_HEALTH
 var is_level_flipped = false
-
 var current_wall_slide_factor: float
 
 ## start debug
@@ -36,10 +35,18 @@ func _process(delta: float) -> void:
 	get_parent().get_node("HUD/PlayerHealth").value = int(health/MAX_HEALTH * 100)
 	if(health <= 0):
 		emit_signal("player_dead")
+		$DeathSoundPlayer.play()
+		$CollisionShape2D.hide()
+		$DeathParticles.emitting = true
+		$CloudParticles.hide()
+		set_physics_process(false)
+		set_process(false)
+
 	
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
+		$CloudParticles.emitting = false
 		## change falling speed to slide on walls
 		if is_on_wall() and velocity.y > 0:
 			current_wall_slide_factor = wall_slide_factor
@@ -50,6 +57,7 @@ func _physics_process(delta: float) -> void:
 		# Add the gravity.
 		velocity.y += gravity * delta * current_wall_slide_factor
 	else:
+		$CloudParticles.emitting = true
 		if is_level_flipped:
 			health -= delta
 		
@@ -64,15 +72,21 @@ func _physics_process(delta: float) -> void:
 #	if Input.is_action_just_pressed("ui_accept"):
 		if is_on_floor():
 			velocity.y = -jump_power
+			$JumpSoundPlayer.play()
 			# change x speed when jumping, it depends on jump power
 #			velocity.x = sign(velocity.x) * cos(deg_to_rad(60)) * jump_power
 			# $AudioStreamPlayer.play()
 		elif is_on_wall():
 			var jump_angle := 60 if (get_wall_normal() == Vector2.LEFT) else 120
 			velocity = Vector2.LEFT.rotated(deg_to_rad(jump_angle)).normalized() * jump_power
-			$AudioStreamPlayer.play()
+			$JumpSoundPlayer.play()
+			
 
 	move_and_slide()
 
 func get_hit():
 	health -= 1
+	$HitSoundPlayer.play()
+	
+func play_win_sound() -> void:
+	$WinLevelSoundPlayer.play()

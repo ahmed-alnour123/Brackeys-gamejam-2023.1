@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bjn53x70i65jj"
+path="res://.godot/imported/Juhani Junkala [Retro Game Music Pack] Ending.wav-10f2b7c088c06e1d41e01ee1737947b4.sample"
+
+[deps]
+
+source_file="res://Art/Sounds/Music/Juhani Junkala [Retro Game Music Pack] Ending.wav"
+dest_files=["res://.godot/imported/Juhani Junkala [Retro Game Music Pack] Ending.wav-10f2b7c088c06e1d41e01ee1737947b4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
