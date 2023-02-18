@@ -18,6 +18,7 @@ config/icon="res://down_upwards_main_menu_icon.png"
 [autoload]
 
 MusicPlayer="*res://Scenes/music_player.tscn"
+TimeCounter="*res://Scripts/TimeCounter.gd"
 
 [display]
 

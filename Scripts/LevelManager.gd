@@ -47,6 +47,7 @@ func win_level():
 	$Player.set_physics_process(false)
 	$Player.play_win_sound()
 	count_time = false
+	TimeCounter.add_to_total_time(Time.get_ticks_msec() - start_time)
 	# go to next level
 	# it will happen from HUD
 
